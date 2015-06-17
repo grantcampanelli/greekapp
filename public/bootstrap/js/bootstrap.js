@@ -17,7 +17,7 @@
  * limitations under the License.
  * ========================================================== */
 
-
+console.log("bootstrap worked!")
 !function ($) {
 
   "use strict"; // jshint ;_;
