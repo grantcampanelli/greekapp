@@ -5,7 +5,7 @@ define(function (require) {
     var Hbs = require('handlebars');
     var Mn = require('backbone.marionette');
     var Q = require('q');
-    var template = require('text!templates/mainView.hbs');
+    var template = require('text!templates/notLoggedInView.hbs');
 
     return Mn.LayoutView.extend({
         template: Hbs.compile(template),

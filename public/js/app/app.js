@@ -11,6 +11,7 @@ define(function (require) {
     var BasicLayoutView = require('util/basic-layout-view');
     var HeaderNavView = require('util/header-nav-view');
     var MainView = require('util/main-view');
+    var NotLoggedInView = require('util/not-logged-in-view');
     var LoadingView = require('util/loading-promise-view');
     var Radio = require('backbone.radio');
 
@@ -105,8 +106,15 @@ define(function (require) {
             var basicView = this.show(new BasicLayoutView);
             var navView = new HeaderNavView();
             basicView.showHeader(navView);
-            var mainView = new MainView;
-            basicView.showMain(mainView);
+
+
+            //Not logged in, show this view
+            var notLoggedInView = new NotLoggedInView;
+            basicView.showMain(notLoggedInView);
+
+            //When logged in, show this main view.
+            //var mainView = new MainView;
+            //basicView.showMain(mainView);
 
 
             //pageChannel.reply('mainRegion', basicView.getRegion('main'));
