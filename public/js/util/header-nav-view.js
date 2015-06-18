@@ -5,9 +5,11 @@ define(function (require) {
     var Hbs = require('handlebars');
     var Mn = require('backbone.marionette');
     var Q = require('q');
-    //var Radio = require('backbone.radio');
+    var Radio = require('backbone.radio');
     var SessionView = require('util/header-menu-session-view');
     var templateSrc = require('text!templates/headerNav.hbs');
+    var pageChannel = Radio.channel('page');
+    var LoginView = require('util/user-login-view');
     
     return Mn.LayoutView.extend({
         template: Hbs.compile(templateSrc),
@@ -21,7 +23,22 @@ define(function (require) {
         
         onShow: function() {
             this.getRegion("right").show(new SessionView());
+        },
+
+        ui : {
+            'loginLink' : '#loginLink'
+        },
+
+        events : {
+            'click @ui.loginLink' : 'showLogin'
+        },
+
+        showLogin : function() {
+            console.log('login please');
+            pageChannel.request('modalRegion').show(new LoginView());
+
         }
+
     
     });
 });

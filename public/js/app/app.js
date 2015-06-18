@@ -5,16 +5,16 @@ define(function (require) {
     var Q = require('q');
     var Handlebars = require('handlebars');
     //var Backbone = require('util/backbone-helper');
-    //var ModalRegion = require('util/modal-region');
-    //var PopupRegion = require('util/popup-region');
+    var ModalRegion = require('util/modal-region');
+    var PopupRegion = require('util/popup-region');
     var RootRegion = require('util/root-region');
     var BasicLayoutView = require('util/basic-layout-view');
     var HeaderNavView = require('util/header-nav-view');
     var MainView = require('util/main-view');
-    //var LoadingView = require('util/loading-promise-view');
-    //var Radio = require('backbone.radio');
+    var LoadingView = require('util/loading-promise-view');
+    var Radio = require('backbone.radio');
 
-    //var pageChannel = Radio.channel('page');
+    var pageChannel = Radio.channel('page');
 
     function navigateToPage(path, options) {
         var options = _.extend({
@@ -100,10 +100,10 @@ define(function (require) {
         }),
 
         initialize: function(option) {
-            //this.modal = new ModalRegion();
+            this.modal = new ModalRegion();
             this.RootRegion = new RootRegion();
             var basicView = this.show(new BasicLayoutView);
-            var navView = new HeaderNavView;
+            var navView = new HeaderNavView();
             basicView.showHeader(navView);
             var mainView = new MainView;
             basicView.showMain(mainView);
@@ -111,7 +111,7 @@ define(function (require) {
 
             //pageChannel.reply('mainRegion', basicView.getRegion('main'));
             //pageChannel.reply('navRegion', navView.getRegion('left'));
-            //pageChannel.reply('modalRegion', this.modal);
+            pageChannel.reply('modalRegion', this.modal);
             //pageChannel.reply('show:loading', function(promise) {
             //    var loadingView = new LoadingView({promise: promise});
             //    basicView.getRegion('main').show(loadingView);
